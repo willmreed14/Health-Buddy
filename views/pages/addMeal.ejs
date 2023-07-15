@@ -1,0 +1,63 @@
+<!-- filename: addMeal.ejs-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add a Meal</title>
+    <%- include('../partials/_method_header.ejs') %>
+</head>
+<body>
+   <!-- Responsive navbar-->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <%- include('../partials/_navbar.ejs') %>
+    </nav>
+  <div class="text-center">
+    <h1>Add a Meal</h1>
+      <!-- User Input Fields-->
+      <label for="meal_name">Meal Name:</label>
+      <input type="text" id="meal_name" name="meal_name"><br><br>
+
+      <label for="date_added">Date Added:</label>
+      <input type="date" id="date_added" name="date_added"><br><br>
+
+      <label for="cal">Calories:</label>
+      <input type="text" id="cal" name="cal"><br><br>
+
+      <!-- Submit POST request when user clicks button-->
+      <button onclick="addMeal()">Add Meal</button>
+  </div>
+    <br>
+    <br>
+    <div id="mydiv" name="mydiv" class="text-center "></div>
+    <script>
+
+        function addMeal() {
+        // assign variables for parameter inputs
+        var meal_name_val = $("#meal_name").val();
+        var date_added_val = $("#date_added").val();
+        var cal_val = $("#cal").val();
+        
+        $.ajax({
+            // where is this request
+            url: "http://localhost:5678/meals",
+            type: "post",
+            data: { 
+            meal_name: meal_name_val,
+            date_added: date_added_val, 
+            cal: cal_val
+            },
+            success: function(response) {
+              $("#mydiv").text("Meal Entry created with ID: " + JSON.stringify(response.insertedId));
+            },
+            error: function(xhr) {
+              $("#mydiv").text('error: ' + xhr);
+            }
+        });
+    }
+    
+  </script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+// config.js - Handles Firebase Auth - *Not sure if working yet?*
+
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 

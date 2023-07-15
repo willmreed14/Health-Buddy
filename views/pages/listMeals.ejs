@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meals</title>
+    <%- include('../partials/_method_header.ejs') %>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <%- include('../partials/_navbar.ejs') %>
+    </nav>
+    <h1 class = "text-center">Meals</h1>
+    <div class="container">
+        <table class="table table-striped table-bordered table-sm">
+        <thead>
+            <tr>
+            <th>Meal Name</th>
+            <th>Date Added</th>
+            <th>Calories</th>
+            <th>Entry ID</th>
+            </tr>
+        </thead>
+        <tbody id="meals-table"></tbody>
+        </table>
+    </div>    
+    <script>
+      fetch('/meals') // Make a GET request to /meals
+        .then(response => response.json()) // Parse the response as JSON
+        .then(meals => { // Do something with the JSON data
+          const mealsTable = document.getElementById('meals-table');
+
+          meals.forEach(meal => { // Loop through each meal
+            const tr = document.createElement('tr'); // Create a new table row
+
+            const mealNameTd = document.createElement('td'); // Create a new table cell for meal name
+            mealNameTd.textContent = meal.meal_name; // Set the text content to the meal name
+            tr.appendChild(mealNameTd); // Add the cell to the row
+
+            const dateAddedTd = document.createElement('td'); // Create a new table cell for date added
+            dateAddedTd.textContent = meal.date_added; // Set the text content to the date added
+            tr.appendChild(dateAddedTd); // Add the cell to the row
+
+            const calTd = document.createElement('td'); // Create a new table cell for calories
+            calTd.textContent = meal.cal; // Set the text content to the calories
+            tr.appendChild(calTd); // Add the cell to the row
+
+            const mealIdTd = document.createElement('td'); // Create a new table cell for meal ID
+            mealIdTd.textContent = meal._id; // Set the text content to the meal ID
+            tr.appendChild(mealIdTd); // Add the cell to the row
+
+            mealsTable.appendChild(tr); // Add the row to the table body
+          });
+        })
+        .catch(error => console.error(error)); // Handle any errors
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!-- filename: listStudents.html-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/_index_header.ejs') %>
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <%- include('../partials/_navbar.ejs') %>
+        </nav>
+        <!-- Page content-->
+        <div class="container">
+            <div class="text-center mt-5">
+                <h1>Health Buddy </h1>
+                <p>The complete web app for tracking your journey to better health and fitness</p>
+                <!-- List of links to methods-->
+                <h3>Menu</h3>
+                <ol class="list-group bg-light">
+                    <li class="list-group-item border mb-2">
+                      <i class="fas fa-user-plus mr-2"></i>
+                      <a href="/pages/addMeal" class="text-decoration-none">POST: Log a Food Entry</a>
+                    </li>
+                    <li class="list-group-item border mb-2">
+                      <i class="fas fa-users mr-2"></i>
+                      <a href="/pages/listMeals" class="text-decoration-none">GET: List Meals</a>
+                    </li>
+                  </ol>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
