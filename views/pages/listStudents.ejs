@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Students</title>
+    <%- include('../partials/_method_header.ejs') %>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <%- include('../partials/_navbar.ejs') %>
+    </nav>
+    <h1 class = "text-center">Students</h1>
+    <div class="container">
+        <table class="table table-striped table-bordered table-sm">
+        <thead>
+            <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>GPA</th>
+            <th>Enrolled?</th>
+            <th>Student ID</th>
+            </tr>
+        </thead>
+        <tbody id="students-table"></tbody>
+        </table>
+    </div>    
+    <script>
+      fetch('/students') // Make a GET request to /students
+        .then(response => response.json()) // Parse the response as JSON
+        .then(students => { // Do something with the JSON data
+          const studentsTable = document.getElementById('students-table');
+
+          students.forEach(student => { // Loop through each student
+            const tr = document.createElement('tr'); // Create a new table row
+
+            const firstNameTd = document.createElement('td'); // Create a new table cell for first name
+            firstNameTd.textContent = student.first_name; // Set the text content to the student's first name
+            tr.appendChild(firstNameTd); // Add the cell to the row
+
+            const lastNameTd = document.createElement('td'); // Create a new table cell for last name
+            lastNameTd.textContent = student.last_name; // Set the text content to the student's last name
+            tr.appendChild(lastNameTd); // Add the cell to the row
+
+            const gpaTd = document.createElement('td'); // Create a new table cell for gpa
+            gpaTd.textContent = student.gpa; // Set the text content to the student's gpa
+            tr.appendChild(gpaTd); // Add the cell to the row
+
+            const enrolledTd = document.createElement('td'); // Create a new table cell for enrolled
+            enrolledTd.textContent = student.enrolled; // Set the text content to the student's enrolled status
+            tr.appendChild(enrolledTd); // Add the cell to the row
+
+            const studentIdTd = document.createElement('td'); // Create a new table cell for enrolled
+            studentIdTd.textContent = student._id; // Set the text content to the student's enrolled status
+            tr.appendChild(studentIdTd); // Add the cell to the row
+
+            studentsTable.appendChild(tr); // Add the row to the table body
+          });
+        })
+        .catch(error => console.error(error)); // Handle any errors
+    </script>
+  </body>
+</html>

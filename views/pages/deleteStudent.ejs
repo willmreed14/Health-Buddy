@@ -1,0 +1,50 @@
+<!-- filename: deleteStudent.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Delete a Student</title>
+    <%- include('../partials/_method_header.ejs') %>
+  </head>
+<body>
+  <!-- Responsive navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <%- include('../partials/_navbar.ejs') %>
+  </nav>
+  <div class="text-center">
+    <h1>Delete a Student</h1>
+      <!-- User Input Fields-->
+      <label for="record_id">Record ID:</label>
+      <input type="text" id="record_id" name="record_id"><br><br>
+
+      <!-- Submit DELETE request when user clicks button-->
+      <button onclick="deleteStudent()">Delete Student</button>
+  </div>
+    <br>
+    <br>
+    <div id="mydiv" name="mydiv" class="text-center"></div>
+    <script>
+
+        function deleteStudent() {
+        // assign variables for parameter inputs
+        var record_id_val = $("#record_id").val();
+        
+        $.ajax({
+            // where is this request
+            url: "http://localhost:5678/students/" + record_id_val,
+            type: "delete",
+            data: { 
+                record_id: record_id_val
+            },
+            success: function(response) {
+            $("#mydiv").text("Student with ID: " + record_id_val + " Deleted.");
+            },
+            error: function(xhr) {
+            $("#mydiv").text('error: ' + xhr);
+            }
+        });
+    }
+    
+  </script>
+
+</body>
+</html>

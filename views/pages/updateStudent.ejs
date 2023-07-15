@@ -1,0 +1,72 @@
+<!-- filename: updateStudent.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update a Student</title>
+    <%- include('../partials/_method_header.ejs') %>
+</head>
+<body>
+  <!-- Responsive navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <%- include('../partials/_navbar.ejs') %>
+  </nav>
+  <div class="text-center">
+    <h1>Update a Student's Data</h1>
+      <!-- User Input Fields-->
+      <label for="record_id">Record ID:</label>
+      <input type="text" id="record_id" name="record_id"><br><br>
+
+      <label for="first_name">First Name:</label>
+      <input type="text" id="first_name" name="first_name"><br><br>
+
+      <label for="last_name">Last Name:</label>
+      <input type="text" id="last_name" name="last_name"><br><br>
+
+      <label for="gpa">GPA:</label>
+      <input type="text" id="gpa" name="gpa"><br><br>
+
+      <label for="enrolled">Enrolled?</label>
+      <select id="enrolled" name="enrolled"><br><br>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+      </select><br><br>
+
+      <!-- Submit PUT request when user clicks button-->
+      <button onclick="updateStudent()">Update Student</button>
+  </div>
+    <br>
+    <br>
+    <div id="mydiv" name="mydiv" class="text-center"></div>
+    <script>
+
+        function updateStudent() {
+        // assign variables for parameter inputs
+        var record_id_val = $("#record_id").val();
+        var first_name_val = $("#first_name").val();
+        var last_name_val = $("#last_name").val();
+        var gpa_val = $("#gpa").val();
+        var enrolled_val = $("#enrolled").val();
+        
+        $.ajax({
+            // where is this request
+            url: "http://localhost:5678/students/" + record_id_val,
+            type: "put",
+            data: { 
+            first_name: first_name_val,
+            last_name: last_name_val, 
+            gpa: gpa_val, 
+            enrolled: enrolled_val
+            },
+            success: function(response) {
+            $("#mydiv").text("Student with ID: " + record_id_val + " Updated Successfully");
+            },
+            error: function(xhr) {
+            $("#mydiv").text('error: ' + xhr);
+            }
+        });
+    }
+    
+  </script>
+
+</body>
+</html>

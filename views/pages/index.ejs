@@ -1,0 +1,49 @@
+<!-- filename: listStudents.html-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../partials/_index_header.ejs') %>
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <%- include('../partials/_navbar.ejs') %>
+        </nav>
+        <!-- Page content-->
+        <div class="container">
+            <div class="text-center mt-5">
+                <h1>Homework 7 Home Page</h1>
+                <p class="lead">William Reed</p>
+                <p class="lead">Z23564142</p>
+                <!-- List of links to methods-->
+                <h3>Menu</h3>
+                <ol class="list-group bg-light">
+                    <li class="list-group-item border mb-2">
+                      <i class="fas fa-user-plus mr-2"></i>
+                      <a href="/pages/addStudent" class="text-decoration-none">POST: Add Student</a>
+                    </li>
+                    <li class="list-group-item border mb-2">
+                      <i class="fas fa-user-edit mr-2"></i>
+                      <a href="/pages/updateStudent" class="text-decoration-none">PUT: Update Student</a>
+                    </li>
+                    <li class="list-group-item border mb-2">
+                      <i class="fas fa-user-minus mr-2"></i>
+                      <a href="/pages/deleteStudent" class="text-decoration-none">DELETE: Delete Student</a>
+                    </li>
+                    <li class="list-group-item border mb-2">
+                      <i class="fas fa-user-check mr-2"></i>
+                      <a href="/pages/displayStudent" class="text-decoration-none">GET: Display Student</a>
+                    </li>
+                    <li class="list-group-item border mb-2">
+                      <i class="fas fa-users mr-2"></i>
+                      <a href="/pages/listStudents" class="text-decoration-none">GET: List Students</a>
+                    </li>
+                  </ol>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
