@@ -54,14 +54,19 @@ connectToDb((err) => { // call connectToDb (from db.js) and pass a callback func
 // *** Page Display Route Handling ***
 // I need to GET the ejs pages and display them on the front end.
 
-// Root: Home page (index.ejs)
+// GET: Generate ROOT Home page (index.ejs)
 app.get("/", function (req, res){
     res.render('pages/index');
   });
   
-// POST: Add a Meal (addMeal.ejs)
+// GET: Generate 'Add a Meal' page (addMeal.ejs)
 app.get("/pages/addMeal", function (req, res){
     res.render('pages/addMeal');
+});
+
+// GET: Generate "Auth" (auth.ejs)
+app.get("/pages/auth", function (req, res){
+    res.render('pages/auth');
 });
 
 // GET: List all Meals (listStudents.ejs)
