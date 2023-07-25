@@ -14,13 +14,16 @@
     <h1>Add a Meal</h1>
       <!-- User Input Fields-->
       <label for="meal_name">Meal Name:</label>
-      <input type="text" id="meal_name" name="meal_name"><br><br>
+      <input type="text" id="meal_name" name="meal_name" required>
+      <span id="meal_name_error" style="color: red;"></span><br><br>
 
       <label for="date_added">Date Added:</label>
-      <input type="date" id="date_added" name="date_added"><br><br>
+      <input type="date" id="date_added" name="date_added" required>
+      <span id="date_added_error" style="color: red;"></span><br><br>
 
       <label for="cal">Calories:</label>
-      <input type="text" id="cal" name="cal"><br><br>
+      <input type="text" id="cal" name="cal" required>
+      <span id="cal_error" style="color: red;"></span><br><br>
 
       <!-- Submit POST request when user clicks button-->
       <button onclick="addMeal()">Add Meal</button>
@@ -36,6 +39,37 @@
         var date_added_val = $("#date_added").val();
         var cal_val = $("#cal").val();
         
+        // input validation and error handling
+        var isValid = true;
+
+        if(meal_name_val.trim() === "") {
+          $("#meal_name_error").text("Meal name is reuqired.");
+          isValid = false;
+        }
+        else {
+          $("#meal_name_error").text("");
+        }
+        
+        if(date_added_val.trim() === "") {
+          $("#date_added_error").text("Valid Date is required.");
+          isValid = false;
+        }
+        else {
+          $("#date_added_error").text("");
+        }
+
+        if(cal_val.trim() === "") {
+          $("#cal_error").text("Valid Calorie number is required.");
+          isValid = false;
+        }
+        else {
+          $("#cal_error").text("");
+        }
+
+        if(!isValid) {
+          return;
+        }
+
         $.ajax({
             // where is this request
             url: "http://localhost:5678/meals",
