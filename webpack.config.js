@@ -1,5 +1,7 @@
 const path = require('path') // core node module 'path'
 
+// publish to firebase hosting space
+
 module.exports = { // export an object from this file
     //specify aspects of webpack configuration
     mode: 'development', // dev mode
