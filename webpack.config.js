@@ -8,5 +8,6 @@ module.exports = { // export an object from this file
         path: path.resolve(__dirname, 'dist'), // path to what folder to put output file into
         filename: 'bundle.js'
     },
-    watch:true // watch file and bundle after every change
+    watch:true, // watch file and bundle after every change
+    devtool: 'eval-source-map'
 }
