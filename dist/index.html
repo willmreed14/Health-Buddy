@@ -3,6 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Firebase 9 Tutorial</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+     integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
     <h1> Getting started with firebase 9</h1>
@@ -59,7 +61,28 @@
     <!-- Unsubscribing to changes 
     <button class="unsub">Unsubscribe from db/auth changes</button>
     -->
-    
+    <div class="container">
+        <h1>Books Table</h1>
+        <table class="table" id="books-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <!-- Add more table headers as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- The books will be inserted here dynamically using JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
     <script src="bundle.js"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
 </body>
 </html>

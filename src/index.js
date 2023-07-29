@@ -43,7 +43,54 @@ const colRef = collection(db, 'books')
 // queries
 const q = query(colRef, orderBy('createdAt')) // fetch docs in col. WHERE x = y 
 
-// ** REAL TIME ** GET (fetch) the documents in a collection (query now tho)
+// GPT SOLUTION 
+
+// Assuming 'q' is a valid Firestore query for the desired collection
+
+// Function to update the table with the books data
+function updateTable(snapshot) {
+    // Create a reference to the table body element
+    const tableBody = document.querySelector("#books-table tbody");
+
+    // Clear the table body before updating to avoid duplicate entries
+    tableBody.innerHTML = "";
+
+    // Iterate through each document in the 'snapshot.docs' array
+    snapshot.docs.forEach((doc) => {
+        // Extract the data from the document
+        const bookData = doc.data();
+
+        // Create a new row (table row) to represent the book entry
+        const row = document.createElement("tr");
+
+        // Add the book properties as table data (table cells) in the row
+        const titleCell = document.createElement("td");
+        titleCell.textContent = bookData.title;
+        row.appendChild(titleCell);
+
+        const authorCell = document.createElement("td");
+        authorCell.textContent = bookData.author;
+        row.appendChild(authorCell);
+
+        const genreCell = document.createElement("td");
+        genreCell.textContent = bookData.genre;
+        row.appendChild(genreCell);
+
+        // Add more cells for additional book properties if needed
+
+        // Append the row to the table body
+        tableBody.appendChild(row);
+    });
+}
+
+// onSnapshot is a method that listens for real-time updates to the query.
+// Whenever a change occurs, the 'updateTable' function will be triggered to update the table with the new data.
+const unsubCol = onSnapshot(q, updateTable);
+
+
+
+
+/* ** REAL TIME ** GET (fetch) the documents in a collection (query now tho)
 const unsubCol = onSnapshot(q, (snapshot) =>{ // fire function whenever a change occurs
     let books = [] // add it to the books array
     snapshot.docs.forEach((doc) => { // cycle thru objects
@@ -51,6 +98,7 @@ const unsubCol = onSnapshot(q, (snapshot) =>{ // fire function whenever a change
     })
     console.log(books) // log the books array to the console
 })
+*/
 
 // GET (fetch) the documents in a collection **NOT REAL TIME THO**
 /*

@@ -11,5 +11,5 @@ module.exports = { // export an object from this file
         filename: 'bundle.js'
     },
     watch:true, // watch file and bundle after every change
-    devtool: 'eval-source-map'
+    devtool: "eval-cheap-source-map"
 }
