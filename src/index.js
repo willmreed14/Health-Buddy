@@ -21,13 +21,14 @@ import {
     onAuthStateChanged
 } from 'firebase/auth'
 
-const firebaseConfig = { // which project are we connecting to?
-    apiKey: "AIzaSyBQlSup34Crk1cSQITesL_eXNwsdyNPTXQ",
-    authDomain: "fir-9-tutorial-e107f.firebaseapp.com",
-    projectId: "fir-9-tutorial-e107f",
-    storageBucket: "fir-9-tutorial-e107f.appspot.com",
-    messagingSenderId: "505528702084",
-    appId: "1:505528702084:web:8288b00d87265ee464ded1"
+const firebaseConfig = {
+    apiKey: "AIzaSyBMt9gDTINuwO4ockgxOneDqyNCmXXmqeU",
+    authDomain: "project17-cen4010.firebaseapp.com",
+    projectId: "project17-cen4010",
+    storageBucket: "project17-cen4010.appspot.com",
+    messagingSenderId: "989291484535",
+    appId: "1:989291484535:web:e11174aed8909d60543d72",
+    measurementId: "G-GB522TK712"
   };
 
 // initialize the app based on the firebase config settings
