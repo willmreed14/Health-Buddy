@@ -1,0 +1,115 @@
+<!-- filename: addStudent.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Enter Workout</title>
+    <!-- Including jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Health Buddy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="auth.html">Log in or Sign up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="myAccount.html">My Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="addMeal.html">Log a Food Item</a></li>
+                    <li class="nav-item"><a class="nav-link" href="addWorkout.html">Log a Workout</a></li>
+
+                    <!-- DROPDOWN MENU (OPTIONAL?)
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="addFood.html">Add a food</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+  
+    <div class="text-center">
+        <br><h1>Enter a Workout</h1><br>
+
+        <label for="workout">Workout:</label>
+        <input type="text" id="workout" name="workout" required>
+        <span id="workout_error" style="color: red;"></span><br><br>
+
+        <label for="date_added">Date Added:</label>
+        <input type="date" id="date_added" name="date_added" required>
+        <span id="date_added_error" style="color: red;"></span><br><br>
+
+        <!-- Submit POST request when user clicks button-->
+        <button onclick="addWorkout()">Add Workout</button>
+  </div>
+    <br>
+    <br>
+    <div id="mydiv" name="mydiv" class="text-center "></div>
+    <script>
+
+        function addWorkout() {
+            // assign variables for parameter inputs
+            var workout_val = $("#workout").val();
+            var date_added_val = $("#date_added").val();
+            
+            // input validation and error handling
+            var isValid = true;
+
+            if(workout_val.trim() === "") {
+                $("#workout_error").text("Workout entry is required.");
+                isValid = false;
+            }
+            else {
+                $("#workout_error").text("");
+            }
+            
+            if(date_added_val.trim() === "") {
+                $("#date_added_error").text("Valid Date is required.");
+                isValid = false;
+            }
+            else {
+                $("#date_added_error").text("");
+            }
+
+            if(!isValid) {
+                return;
+            }
+
+            $.ajax({
+                // where is this request
+                url: "http://localhost:5678/meals",
+                type: "post",
+                data: { 
+                    workout: workout_val,
+                    date_added: date_added_val
+                },
+                success: function(response) {
+                    $("#mydiv").text("Workout Entry created with ID: " + JSON.stringify(response.insertedId));
+                },
+                error: function(xhr) {
+                    $("#mydiv").text('error: ' + xhr);
+                }
+            });
+        }
+    
+  </script>
+
+    </div>
+      
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="src/index.js"></script>
+</body>
+</html>
