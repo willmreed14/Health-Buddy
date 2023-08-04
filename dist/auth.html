@@ -12,33 +12,33 @@
     </head>
     <body>
         <!-- Responsive navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Health Buddy</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="auth.html">Log in or Sign up</a></li>
-                    <li class="nav-item"><a class="nav-link" href="myAccount.html">My Account</a></li>
-                    <li class="nav-item"><a class="nav-link" href="addMeal.html">Log a Food Item</a></li>
-                    <li class="nav-item"><a class="nav-link" href="addWorkout.html">Log a Workout</a></li>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Health Buddy</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="auth.html">Log in or Sign up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="myAccount.html">My Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="addMeal.html">Log a Food Item</a></li>
+                        <li class="nav-item"><a class="nav-link" href="addWorkout.html">Log a Workout</a></li>
 
-                    <!-- DROPDOWN MENU (OPTIONAL?)
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="addFood.html">Add a food</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    -->
-                </ul>
+                        <!-- DROPDOWN MENU (OPTIONAL?)
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="addFood.html">Add a food</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        -->
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
         <!-- Page content-->
         <!-- example Log In + firebase authentication -->
         <div class="container text-center">
@@ -53,7 +53,7 @@
             <input type="password" id="password">
             <span id="password_error" style="color: red;"></span><br>
 
-            <button onclick="logIn()">Log In</button><br><br>
+            <button onclick="login()">Log In</button><br><br>
 
             <h4>Sign Up</h4><br>
             <label for="first_name">First Name:</label>
@@ -74,13 +74,21 @@
 
             <label for="age">Age:</label>
             <input type="text" id="age" name="age">
-            <span id="age_error" style="color: red;"></span><br>
+            <span id="age_error" style="color: red;"></span><br><br>
 
-            <button onclick="signUp()">Sign Up</button>
+            <label for="email">Enter Email</label>
+            <input type="text" id="email_signup">
+            <span id="email_error" style="color: red;"></span><br>
+
+            <label for="password">Create Password</label>
+            <input type="password" id="password_signup">
+            <span id="password_error" style="color: red;"></span><br>
+
+            <button onclick="signup()">Sign Up</button>
         </div>
 
         <script>
-            function logIn() {
+            function login() {
                 var email_val = $("#email").val();
                 var password_val = $("#password").val();
 
@@ -111,12 +119,15 @@
             }
 
 
-            function signUp() {
+            function signup() {
                 var first_name_val = $("#first_name").val();
                 var last_name_val = $("#last_name").val();
                 var current_weight_val = $("#current_weight").val();
                 var goal_weight_val = $("#goal_weight").val();
                 var age_val = $("#age").val();
+
+                var email_val = $("#email_signup").val();
+                var password_val = $("#password_signup").val();
                   
                 var isValid = true;
 
@@ -160,18 +171,38 @@
                     $("#age_error").text("");
                 }
 
-                if(!isValid){
-                    return;
+                if(email_val.trim() === "") {
+                    $("#email_error").text("Entry is required.");
+                    isValid = false;
                 }
-                else if(isValid){
+                else {
+                    $("#email_error").text("");
+                }
+
+                if(password_val.trim() === "") {
+                    $("#password_error").text("Entry is required.");
+                    isValid = false;
+                }
+                else {
+                    $("#password_error").text("");
+                }
+
+                if (isValid) {
+                    localStorage.setItem("email", email_val);
+                    localStorage.setItem("first_name", first_name_val);
+                    localStorage.setItem("last_name", last_name_val);
+                    localStorage.setItem("current_weight", current_weight_val);
+                    localStorage.setItem("goal_weight", goal_weight_val);
+                    localStorage.setItem("age", age_val);
                     window.location.href = "myAccount.html";
                 }
+               
             }
         </script>
     </body>
-</script>
+
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="src/index.js"></script>
-</body>
+
 </html>
