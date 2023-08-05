@@ -73,6 +73,10 @@ function updateTable(snapshot) {
         authorCell.textContent = bookData.calories;
         row.appendChild(authorCell);
 
+        const dateCell = document.createElement("td");
+        dateCell.textContent = bookData.date;
+        row.appendChild(dateCell);
+
         // Add more cells for additional book properties if needed
 
         // Append the row to the table body
