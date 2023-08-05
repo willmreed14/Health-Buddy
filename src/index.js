@@ -60,6 +60,7 @@ function updateTable(snapshot) {
     snapshot.docs.forEach((doc) => {
         // Extract the data from the document
         const bookData = doc.data();
+        const bookID = doc.id;
 
         // Create a new row (table row) to represent the book entry
         const row = document.createElement("tr");
@@ -76,6 +77,10 @@ function updateTable(snapshot) {
         const dateCell = document.createElement("td");
         dateCell.textContent = bookData.date;
         row.appendChild(dateCell);
+
+        const idCell = document.createElement("td");
+        idCell.textContent = bookID;
+        row.appendChild(idCell);
 
         // Add more cells for additional book properties if needed
 
