@@ -39,10 +39,10 @@ const db = getFirestore()
 const auth = getAuth()
 
 // collection ref
-const colRef = collection(db, 'meals')
+const mealsRef = collection(db, 'meals')
 
 // queries
-const q = query(colRef, orderBy('createdAt')) // fetch docs in col. WHERE x = y 
+const q = query(mealsRef, orderBy('createdAt')) // fetch docs in col. WHERE x = y 
 
 // GPT SOLUTION 
 
@@ -66,16 +66,12 @@ function updateTable(snapshot) {
 
         // Add the book properties as table data (table cells) in the row
         const titleCell = document.createElement("td");
-        titleCell.textContent = bookData.title;
+        titleCell.textContent = bookData.name;
         row.appendChild(titleCell);
 
         const authorCell = document.createElement("td");
-        authorCell.textContent = bookData.author;
+        authorCell.textContent = bookData.calories;
         row.appendChild(authorCell);
-
-        const genreCell = document.createElement("td");
-        genreCell.textContent = bookData.genre;
-        row.appendChild(genreCell);
 
         // Add more cells for additional book properties if needed
 
@@ -116,18 +112,18 @@ getDocs(colRef)
     })
 */
 
-// POST (add) a new document to a collection
-const addBookForm = document.querySelector('.add') // store add form in a constant
-addBookForm.addEventListener('submit', (e) => { // fire a function on form submit
+// POST (add) a new MEAL to MEALS collection
+const addMealForm = document.querySelector('.addMeal') // store add form in a constant
+addMealForm.addEventListener('submit', (e) => { // fire a function on form submit
     e.preventDefault() // don't refresh the page upon submit
 
-    addDoc(colRef, {
-        title: addBookForm.title.value,
-        author: addBookForm.author.value, 
+    addDoc(mealsRef, {
+        name: addMealForm.name.value,
+        calories: addMealForm.calories.value, 
         createdAt: serverTimestamp()
     })
     .then(() => { // async, clear the form once the user submits (don't refresh the page tho)
-        addBookForm.reset()
+        addMealForm.reset()
     })
 
 })
