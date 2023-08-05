@@ -39,7 +39,7 @@ const db = getFirestore()
 const auth = getAuth()
 
 // collection ref
-const colRef = collection(db, 'books')
+const colRef = collection(db, 'meals')
 
 // queries
 const q = query(colRef, orderBy('createdAt')) // fetch docs in col. WHERE x = y 
