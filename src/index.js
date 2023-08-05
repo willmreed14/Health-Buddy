@@ -42,7 +42,7 @@ const auth = getAuth()
 const mealsRef = collection(db, 'meals')
 
 // queries
-const q = query(mealsRef, orderBy('createdAt')) // fetch docs in col. WHERE x = y 
+const q = query(mealsRef, orderBy('date')) // fetch docs in col. WHERE x = y 
 
 // GPT SOLUTION 
 
@@ -120,7 +120,7 @@ addMealForm.addEventListener('submit', (e) => { // fire a function on form submi
     addDoc(mealsRef, {
         name: addMealForm.name.value,
         calories: addMealForm.calories.value, 
-        createdAt: serverTimestamp()
+        date: addMealForm.date.value
     })
     .then(() => { // async, clear the form once the user submits (don't refresh the page tho)
         addMealForm.reset()
