@@ -62,7 +62,7 @@
     </div> 
     
 
-    <!-- Add a book form-->
+    <!-- Add a meal form-->
     <div class="container text-center ">
         <h3> Add a Meal </h3>
         <form class = "addMeal">
@@ -76,7 +76,7 @@
             <button>add a new meal</button>
         </form>
 
-        <!-- Delete a book form-->
+        <!-- Delete a meal form-->
         <form class = "delete">
             <label for="id"> Meal ID: </label>
             <input type="text" name="id" required>
@@ -84,7 +84,7 @@
             <button>delete a meal</button>
         </form>
 
-        <!-- Update a book form-->
+        <!-- Update a meal form-->
         <form class = "update">
             <label for="id"> Meal ID: </label>
             <input type="text" name="id" required>
@@ -92,24 +92,40 @@
             <button>update a meal</button>
         </form>
     </div> 
-    
-    <div class="container">
-        <h1>Meals Table</h1>
-        <table class="table" id="books-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Calories</th>
-                    <th>Date</th>
-                    <th>Meal ID</th>
-                    <!-- Add more table headers as needed -->
-                </tr>
-            </thead>
-            <tbody>
-                <!-- The books will be inserted here dynamically using JavaScript -->
-            </tbody>
-        </table>
-    </div>
+
+    <!-- Add a workout form-->
+    <div class="container text-center ">
+        <h3> Add a Workout </h3>
+        <form class = "addWorkout">
+            <label for="name"> Workout Name: </label>
+            <input type="text" name="name" required>
+            <label for="sets"> Sets: </label>
+            <input type="text" name="sets" required>
+            <label for="reps"> Reps: </label>
+            <input type="text" name="reps" required>
+            <label for="date"> Date: </label>
+            <input type="date" name="date">
+
+            <button>add a new workout</button>
+        </form>
+
+        <!-- Delete a workout form-->
+        <form class = "deleteWorkout">
+            <label for="id"> Workout ID: </label>
+            <input type="text" name="id" required>
+
+            <button>delete a workout</button>
+        </form>
+
+        <!-- Update a book form-->
+        <form class = "updateWorkout">
+            <label for="id"> Workout ID: </label>
+            <input type="text" name="id" required>
+
+            <button>update a workout</button>
+        </form>
+    </div> 
+
 
     <script src="bundle.js"></script>
 
