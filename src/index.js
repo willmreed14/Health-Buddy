@@ -40,15 +40,13 @@ const auth = getAuth()
 
 // collection ref
 const mealsRef = collection(db, 'meals')
+const workoutsRef = collection(db, 'workouts')
 
 // queries
-const q = query(mealsRef, orderBy('date')) // fetch docs in col. WHERE x = y 
+const qM = query(mealsRef, orderBy('date')) // fetch docs in col. WHERE x = y 
+const qW = query(workoutsRef, orderBy('date')) // fetch docs in col. WHERE x = y 
 
-// GPT SOLUTION 
-
-// Assuming 'q' is a valid Firestore query for the desired collection
-
-// Function to update the table with the books data
+// Function to update the table with the meals data
 function updateTable(snapshot) {
     // Create a reference to the table body element
     const tableBody = document.querySelector("#books-table tbody");
@@ -89,37 +87,56 @@ function updateTable(snapshot) {
     });
 }
 
+// Function to update the table with the workouts data
+function updateWorkoutsTable(snapshot) {
+    // Create a reference to the table body element
+    const tableBody = document.querySelector("#workouts-table tbody");
+
+    // Clear the table body before updating to avoid duplicate entries
+    tableBody.innerHTML = "";
+
+    // Iterate through each document in the 'snapshot.docs' array
+    snapshot.docs.forEach((doc) => {
+        // Extract the data from the document
+        const workoutData = doc.data();
+        const workoutID = doc.id;
+
+        // Create a new row (table row) to represent the book entry
+        const row = document.createElement("tr");
+
+        // Add the book properties as table data (table cells) in the row
+        const nameCell = document.createElement("td");
+        nameCell.textContent = workoutData.name;
+        row.appendChild(nameCell);
+
+        const setsCell = document.createElement("td");
+        setsCell.textContent = workoutData.sets;
+        row.appendChild(setsCell);
+
+        const repsCell = document.createElement("td");
+        repsCell.textContent = workoutData.reps;
+        row.appendChild(repsCell);
+
+        const dateCell = document.createElement("td");
+        dateCell.textContent = workoutData.date;
+        row.appendChild(dateCell);
+
+        const idCell = document.createElement("td");
+        idCell.textContent = workoutID;
+        row.appendChild(idCell);
+
+        // Add more cells for additional book properties if needed
+
+        // Append the row to the table body
+        tableBody.appendChild(row);
+    });
+}
+
 // onSnapshot is a method that listens for real-time updates to the query.
 // Whenever a change occurs, the 'updateTable' function will be triggered to update the table with the new data.
-const unsubCol = onSnapshot(q, updateTable);
+onSnapshot(qM, updateTable);
+onSnapshot(qW, updateWorkoutsTable);
 
-
-
-
-/* ** REAL TIME ** GET (fetch) the documents in a collection (query now tho)
-const unsubCol = onSnapshot(q, (snapshot) =>{ // fire function whenever a change occurs
-    let books = [] // add it to the books array
-    snapshot.docs.forEach((doc) => { // cycle thru objects
-        books.push({ ...doc.data(), id: doc.id }) // get the data and id #
-    })
-    console.log(books) // log the books array to the console
-})
-*/
-
-// GET (fetch) the documents in a collection **NOT REAL TIME THO**
-/*
-getDocs(colRef)
-    .then((snapshot) => { // for each object in this snapshot
-        let books = [] // add it to the books array
-        snapshot.docs.forEach((doc) => { // cycle thru objects
-            books.push({ ...doc.data(), id: doc.id }) // get the data and id #
-        })
-        console.log(books) // log the books array to the console
-    })
-    .catch(err => {
-        console.log(err.message)
-    })
-*/
 
 // POST (add) a new MEAL to MEALS collection
 const addMealForm = document.querySelector('.addMeal') // store add form in a constant
@@ -137,7 +154,23 @@ addMealForm.addEventListener('submit', (e) => { // fire a function on form submi
 
 })
 
-// DELETE an existing document from a collection
+// POST (add) a new WORKOUT to WORKOUTS collection
+const addWorkoutForm = document.querySelector('.addMeal') // store add form in a constant
+addMealForm.addEventListener('submit', (e) => { // fire a function on form submit
+    e.preventDefault() // don't refresh the page upon submit
+
+    addDoc(mealsRef, {
+        name: addMealForm.name.value,
+        calories: addMealForm.calories.value, 
+        date: addMealForm.date.value
+    })
+    .then(() => { // async, clear the form once the user submits (don't refresh the page tho)
+        addMealForm.reset()
+    })
+
+})
+
+// DELETE an existing MEAL
 const deleteBookForm = document.querySelector('.delete') // store delete form in a constant
 deleteBookForm.addEventListener('submit', (e) => { // fire a function on form submit
     e.preventDefault() // don't refresh the page upon submit
@@ -164,7 +197,7 @@ const unsubDoc = onSnapshot(docRef, (doc) => {
     console.log(doc.data(), doc.id)
 })
 
-// updating a document
+// update a meal
 const updateForm = document.querySelector('.update')
 updateForm.addEventListener('submit', (e) => {
     e.preventDefault()
