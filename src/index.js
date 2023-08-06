@@ -172,14 +172,27 @@ addWorkoutForm.addEventListener('submit', (e) => { // fire a function on form su
 })
 
 // DELETE an existing MEAL
-const deleteBookForm = document.querySelector('.delete') // store delete form in a constant
-deleteBookForm.addEventListener('submit', (e) => { // fire a function on form submit
+const deleteMealForm = document.querySelector('.delete') // store delete form in a constant
+deleteMealForm.addEventListener('submit', (e) => { // fire a function on form submit
     e.preventDefault() // don't refresh the page upon submit
 
-    const docRef = doc(db, 'books', deleteBookForm.id.value)
+    const docRef = doc(db, 'meals', deleteMealForm.id.value)
     deleteDoc(docRef)
         .then(() => { // async, clear the form once the user submits (don't refresh the page tho)
-            deleteBookForm.reset()
+            deleteMealForm.reset()
+        })
+
+})
+
+// DELETE an existing WORKOUT
+const deleteWorkoutForm = document.querySelector('.deleteWorkout') // store delete form in a constant
+deleteWorkoutForm.addEventListener('submit', (e) => { // fire a function on form submit
+    e.preventDefault() // don't refresh the page upon submit
+
+    const docRef = doc(db, 'workouts', deleteWorkoutForm.id.value)
+    deleteDoc(docRef)
+        .then(() => { // async, clear the form once the user submits (don't refresh the page tho)
+            deleteWorkoutForm.reset()
         })
 
 })
@@ -198,22 +211,6 @@ const unsubDoc = onSnapshot(docRef, (doc) => {
     console.log(doc.data(), doc.id)
 })
 
-// update a meal
-const updateForm = document.querySelector('.update')
-updateForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-
-    const docRef = doc(db, 'books', updateForm.id.value)
-
-    updateDoc(docRef, {
-        title: 'updated title'
-
-    })
-    .then(()=>{
-        updateForm.reset
-    })
-
-})
 
 // signing users up
 const signupForm = document.querySelector('.signup')
