@@ -155,17 +155,18 @@ addMealForm.addEventListener('submit', (e) => { // fire a function on form submi
 })
 
 // POST (add) a new WORKOUT to WORKOUTS collection
-const addWorkoutForm = document.querySelector('.addMeal') // store add form in a constant
-addMealForm.addEventListener('submit', (e) => { // fire a function on form submit
+const addWorkoutForm = document.querySelector('.addWorkout') // store add form in a constant
+addWorkoutForm.addEventListener('submit', (e) => { // fire a function on form submit
     e.preventDefault() // don't refresh the page upon submit
 
-    addDoc(mealsRef, {
-        name: addMealForm.name.value,
-        calories: addMealForm.calories.value, 
-        date: addMealForm.date.value
+    addDoc(workoutsRef, {
+        name: addWorkoutForm.name.value,
+        sets: addWorkoutForm.sets.value, 
+        reps: addWorkoutForm.reps.value, 
+        date: addWorkoutForm.date.value
     })
     .then(() => { // async, clear the form once the user submits (don't refresh the page tho)
-        addMealForm.reset()
+        addWorkoutForm.reset()
     })
 
 })
